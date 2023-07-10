@@ -19,6 +19,7 @@ defmodule TenExTakeHome.Services.Marvel.Http do
       )
 
     if status == 200 do
+      # TODO: Make me Async if business is ok with eventual consistency
       ApiStats.new(%{url: @characters_url, status_code: 200})
       {:ok, data["data"]}
     else
