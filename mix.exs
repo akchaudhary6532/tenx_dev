@@ -19,7 +19,7 @@ defmodule TenExTakeHome.MixProject do
   def application do
     [
       mod: {TenExTakeHome.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -45,6 +45,12 @@ defmodule TenExTakeHome.MixProject do
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:finch, "~> 0.13"},
+      {:httpoison, "~> 1.8.1"},
+      {:hackney, "~> 1.9", override: true},
+      {:poison, "~> 5.0", override: true},
+      {:exvcr, "~> 0.11", only: :test},
+      {:mox, "~> 1.0", only: :test},
+      {:faker, "~> 0.17", only: :test},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},

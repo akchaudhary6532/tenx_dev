@@ -23,6 +23,12 @@ config :ten_ex_take_home, TenExTakeHomeWeb.Endpoint,
 # In test we don't send emails.
 config :ten_ex_take_home, TenExTakeHome.Mailer, adapter: Swoosh.Adapters.Test
 
+config :ten_ex_take_home, TenExTakeHome.Services.Marvel.Api,
+  base_url: "http://gateway.marvel.com/v1/public",
+  private_key: System.get_env("MARVEL_PRIVATE_TEST_KEY"),
+  public_key: System.get_env("MARVEL_PUBLIC_TEST_KEY"),
+  marvel_module: MarvelApiMock
+
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 

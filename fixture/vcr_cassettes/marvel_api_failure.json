@@ -1,0 +1,26 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": {
+        "connect_timeout": 5000
+      },
+      "request_body": "",
+      "url": "http://gateway.marvel.com/v1/public/characters?ts=1688720261690&hash=890e413672d07c0f9f43205f645ceaef&apikey=6d20cfb4d0262457d51dc56f42a7f2fe&limit=20&offset=0"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"code\":\"InvalidCredentials\",\"message\":\"That hash, timestamp and key combination is invalid.\"}",
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "94",
+        "Date": "Fri, 07 Jul 2023 09:07:44 GMT",
+        "Connection": "keep-alive"
+      },
+      "status_code": 401,
+      "type": "ok"
+    }
+  }
+]

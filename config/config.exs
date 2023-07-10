@@ -51,6 +51,16 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
+config :ten_ex_take_home, TenExTakeHome.Services.Marvel.Api,
+  base_url: "http://gateway.marvel.com/v1/public",
+  private_key: System.get_env("MARVEL_PRIVATE_KEY"),
+  public_key: System.get_env("MARVEL_PUBLIC_KEY")
+
+config :httpoison,
+  timeout: 5000, # timeout in milliseconds for HTTP requests
+  recv_timeout: 5000, # timeout in milliseconds for receiving responses
+  hackney_options: [timeout: 5_000]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
