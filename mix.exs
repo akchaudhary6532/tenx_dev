@@ -45,7 +45,7 @@ defmodule TenExTakeHome.MixProject do
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:finch, "~> 0.13"},
-      {:httpoison, "~> 1.8.1"},
+      {:httpoison, "~> 2.1.0"},
       {:hackney, "~> 1.9", override: true},
       {:poison, "~> 5.0", override: true},
       {:exvcr, "~> 0.11", only: :test},
