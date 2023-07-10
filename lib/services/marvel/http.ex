@@ -3,6 +3,7 @@ defmodule TenExTakeHome.Services.Marvel.Http do
   Module handeling API calls to MarvelApis
   """
   alias TenExTakeHome.Helpers.ExternalApiHelper
+  alias TenExTakeHome.Schema.ApiStats
 
   @behaviour TenExTakeHome.Services.Marvel.Behaviour
   @characters_url "/characters"
@@ -18,6 +19,7 @@ defmodule TenExTakeHome.Services.Marvel.Http do
       )
 
     if status == 200 do
+      ApiStats.new(%{url: @characters_url, status_code: 200})
       {:ok, data["data"]}
     else
       {:error, data}

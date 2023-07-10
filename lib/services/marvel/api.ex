@@ -18,10 +18,17 @@ defmodule TenExTakeHome.Services.Marvel.Api do
     }
   end
 
-  @spec fetch_character_names(map(), integer(), integer()) ::  {:ok, Behaviour.character_names_obj()} | {:error, String.t()}
+  @doc """
+  Fetches lists of comic characters
+  """
+  @spec fetch_character_names(map(), integer(), integer()) ::  {:ok, Behaviour.character_names_obj()} | {:error, map()}
   def fetch_character_names(config, limit, offset) do
-    with {:ok, data} <- config.module.fetch_character_names(config, limit, offset) do
+    with {:valid, true} <- {:valid, validate_limit_and_offset(limit, offset)},
+    {:ok, data} <- config.module.fetch_character_names(config, limit, offset) do
       {:ok, transform_fetch_character_names(data)}
+    else
+      {:valid, false} -> {:error, %{"code" => "NegativePage", "message" => "Limit must be > 0 and offset >= 0"}}
+      error -> error
     end
   end
 
@@ -31,7 +38,12 @@ defmodule TenExTakeHome.Services.Marvel.Api do
     %{
       names: names,
       limit: data["limit"],
-      offset: data["offset"]
+      offset: data["offset"],
+      total: data["total"],
+      total_pages: ceil(data["total"] / data["limit"]),
+      page: div(data["offset"], data["limit"]) + 1
     }
   end
+
+  defp validate_limit_and_offset(limit, offset), do: limit > 0 and offset >= 0
 end

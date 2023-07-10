@@ -3,15 +3,12 @@ defmodule TenExTakeHome.Helpers.ExternalApiHelper do
   Wrapper around Http service (HTTPoison)
   """
 
-  @spec get(String.t(), keyword(), keyword(), keyword(), boolean()) ::
-          {:ok, map()} | {:error, map() | String.t()} | :ok
-  def get(url, query_params \\ [], header \\ [], options \\ [], process_response \\ true) do
-    url = maybe_append_query_params(url, query_params)
-    response = HTTPoison.get(url, header, options ++ [timeout: 5000])
-
-    if process_response,
-      do: process_response(response),
-      else: :ok
+  @spec get(String.t(), keyword(), keyword(), keyword()) ::
+          {integer(), map()}
+  def get(url, query_params \\ [], header \\ [], options \\ []) do
+    maybe_append_query_params(url, query_params)
+    |> HTTPoison.get(header, options ++ [timeout: 5000])
+    |> process_response()
   end
 
   defp maybe_append_query_params(url, []), do: url

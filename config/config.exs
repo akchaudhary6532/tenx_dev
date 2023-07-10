@@ -56,6 +56,13 @@ config :ten_ex_take_home, TenExTakeHome.Services.Marvel.Api,
   private_key: System.get_env("MARVEL_PRIVATE_KEY"),
   public_key: System.get_env("MARVEL_PUBLIC_KEY")
 
+config :ten_ex_take_home, MyApp.RedisCache,
+  conn_opts: [
+    # Redix options
+    host: "127.0.0.1",
+    port: 6379
+  ]
+
 config :httpoison,
   timeout: 5000, # timeout in milliseconds for HTTP requests
   recv_timeout: 5000, # timeout in milliseconds for receiving responses

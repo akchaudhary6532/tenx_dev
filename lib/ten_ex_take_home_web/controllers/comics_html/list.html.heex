@@ -1,0 +1,55 @@
+<style>
+  .container {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .character-list {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+
+  .character-item {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .pagination {
+    font-size: 14px;
+    color: #999;
+  }
+
+  .pagination-btn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+<.flash_group flash={@flash} />
+<%= if not is_nil(Map.get(@data, :names)) do %>
+  <div class="container">
+    <section>
+      <h1 class="title">Marvel Comics characters</h1>
+    </section>
+    <ul class="character-list">
+      <%= for item <- @data.names do %>
+        <li class="character-item"> - <%= item %> </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="pagination">
+    <%= if @data.page > 1 do %> <.link href={~p"/?page=#{@data.page-1}"} method="get">Previous</.link> |  <% end %> Page: <%= @data.page %>  |  Total Pages: <%= @data.total_pages %> |  <%= if @data.total_pages > @data.page do %> <.link href={~p"/?page=#{@data.page+1}"} method="get">Next</.link> <% end %>
+  </div>
+<% end %>

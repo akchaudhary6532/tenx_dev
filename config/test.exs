@@ -29,6 +29,7 @@ config :ten_ex_take_home, TenExTakeHome.Services.Marvel.Api,
   public_key: System.get_env("MARVEL_PUBLIC_TEST_KEY"),
   marvel_module: MarvelApiMock
 
+config :ten_ex_take_home, TenExTakeHome.Cache, adapter: Nebulex.Adapters.Nil
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 
