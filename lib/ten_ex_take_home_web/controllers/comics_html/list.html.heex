@@ -45,11 +45,17 @@
     </section>
     <ul class="character-list">
       <%= for item <- @data.names do %>
-        <li class="character-item"> - <%= item %> </li>
+        <li class="character-item">- <%= item %></li>
       <% end %>
     </ul>
   </div>
   <div class="pagination">
-    <%= if @data.page > 1 do %> <.link href={~p"/?page=#{@data.page-1}"} method="get">Previous</.link> |  <% end %> Page: <%= @data.page %>  |  Total Pages: <%= @data.total_pages %> |  <%= if @data.total_pages > @data.page do %> <.link href={~p"/?page=#{@data.page+1}"} method="get">Next</.link> <% end %>
+    <%= if @data.page > 1 do %>
+      <.link href={~p"/?page=#{@data.page - 1}"} method="get">Previous</.link> |
+    <% end %>
+    Page: <%= @data.page %> |  Total Pages: <%= @data.total_pages %> |
+    <%= if @data.total_pages > @data.page do %>
+      <.link href={~p"/?page=#{@data.page + 1}"} method="get">Next</.link>
+    <% end %>
   </div>
 <% end %>

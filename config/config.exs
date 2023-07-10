@@ -64,8 +64,10 @@ config :ten_ex_take_home, MyApp.RedisCache,
   ]
 
 config :httpoison,
-  timeout: 5000, # timeout in milliseconds for HTTP requests
-  recv_timeout: 5000, # timeout in milliseconds for receiving responses
+  # timeout in milliseconds for HTTP requests
+  timeout: 5000,
+  # timeout in milliseconds for receiving responses
+  recv_timeout: 5000,
   hackney_options: [timeout: 5_000]
 
 # Configures Elixir's Logger

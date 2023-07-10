@@ -21,19 +21,23 @@ defmodule TenExTakeHome.Services.Marvel.Api do
   @doc """
   Fetches lists of comic characters
   """
-  @spec fetch_character_names(map(), integer(), integer()) ::  {:ok, Behaviour.character_names_obj()} | {:error, map()}
+  @spec fetch_character_names(map(), integer(), integer()) ::
+          {:ok, Behaviour.character_names_obj()} | {:error, map()}
   def fetch_character_names(config, limit, offset) do
     with {:valid, true} <- {:valid, validate_limit_and_offset(limit, offset)},
-    {:ok, data} <- config.module.fetch_character_names(config, limit, offset) do
+         {:ok, data} <- config.module.fetch_character_names(config, limit, offset) do
       {:ok, transform_fetch_character_names(data)}
     else
-      {:valid, false} -> {:error, %{"code" => "NegativePage", "message" => "Limit must be > 0 and offset >= 0"}}
-      error -> error
+      {:valid, false} ->
+        {:error, %{"code" => "NegativePage", "message" => "Limit must be > 0 and offset >= 0"}}
+
+      error ->
+        error
     end
   end
 
   defp transform_fetch_character_names(data) do
-   names =  Enum.map(data["results"], & &1["name"])
+    names = Enum.map(data["results"], & &1["name"])
 
     %{
       names: names,

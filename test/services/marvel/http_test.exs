@@ -28,7 +28,6 @@ defmodule TenExTakeHome.Services.Marvel.HttpTest do
 
         assert {:error, %{"code" => "InvalidCredentials"}} =
                  Http.fetch_character_names(config, 20, 0)
-
       end
     end
   end
